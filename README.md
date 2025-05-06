@@ -17,8 +17,10 @@ Add this to your `.pre-commit-config.yaml`
 ```
 
 ## Hooks
-### `asdf`
-Lorem ipsum dolor sit amet
+**NOTE:** Only pyproject.toml is currently inspected. It is assumed that project metadata is supported per [PyPA Guidance](https://packaging.python.org/en/latest/guides/writing-pyproject-toml/)
+
+### `check-eol`
+Check `requires-python` against the current Python lifecycle & fail if an EOL version is included.
 
 ## Python Version Support
 Starting with Python 3.11, a best attempt is made to support Python versions until they reach EOL, after which support will be formally dropped by the next minor or major release of this package, whichever arrives first. The status of Python versions can be found [here](https://devguide.python.org/versions/).
