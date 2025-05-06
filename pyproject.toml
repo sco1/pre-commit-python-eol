@@ -1,0 +1,80 @@
+[project]
+name = "pre-commit-python-eol"
+version = "0.1.0"
+description = "A pre-commit hook for enforcing supported Python EOL"
+license = "MIT"
+license-files = ["LICENSE"]
+authors = [
+    {name = "sco1", email = "sco1.git@gmail.com"}
+]
+
+readme = "README.md"
+classifiers = [
+    "Development Status :: 4 - Beta",
+    "Intended Audience :: Developers",
+    "Operating System :: OS Independent",
+    "Programming Language :: Python :: 3 :: Only",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Programming Language :: Python :: 3.13",
+    "Typing :: Typed",
+]
+
+requires-python = ">=3.11"
+dependencies = [
+]
+
+[project.urls]
+Homepage = "https://github.com/sco1/"
+Documentation = "https://github.com/sco1/pre-commit-python-eol/blob/main/README.md"
+Repository = "https://github.com/sco1/pre-commit-python-eol.git"
+Issues = "https://github.com/sco1/pre-commit-python-eol/issues"
+Changelog = "https://github.com/sco1/pre-commit-python-eol/blob/main/CHANGELOG.md"
+
+[project.scripts]
+checkeol = "pre_commit_python_eol.check_eol:main"
+
+[tool.uv]
+dev-dependencies = [
+    "black~=25.0",
+    "flake8~=7.1",
+    "flake8-annotations~=3.1",
+    "isort~=6.0",
+    "mypy~=1.14",
+    "pre-commit~=4.0",
+    "pytest~=8.3",
+    "pytest-cov~=6.0",
+    "pytest-randomly~=3.16",
+    "ruff~=0.9",
+    "sco1-bumper~=1.0",
+    "tox~=4.23",
+    "tox-uv~=1.17",
+]
+
+[tool.black]
+line-length = 100
+
+[tool.isort]
+case_sensitive = true
+known_first_party = "pre-commit-python-eol,tests"
+no_lines_before = "LOCALFOLDER"
+order_by_type = false
+profile = "black"
+line_length = 100
+
+[tool.mypy]
+disallow_incomplete_defs = true
+disallow_untyped_calls = true
+disallow_untyped_decorators = true
+disallow_untyped_defs = true
+ignore_missing_imports = true
+no_implicit_optional = true
+show_error_codes = true
+warn_redundant_casts = true
+warn_return_any = true
+warn_unused_configs = true
+warn_unused_ignores = true
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"

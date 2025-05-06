@@ -1,0 +1,6 @@
+- id: check-eol
+  name: Check supported Python EOL
+  entry: checkeol
+  language: python
+  files: '^pyproject.toml$'
+  types: [toml]
