@@ -11,13 +11,13 @@ Add this to your `.pre-commit-config.yaml`
 
 ```yaml
 -   repo: https://github.com/sco1/pre-commit-python-eol
-    rev: v0.1.0
+    rev: v2025.5.0
     hooks:
     - id: check-eol
 ```
 
 ## Hooks
-**NOTE:** Only pyproject.toml is currently inspected. It is assumed that project metadata is supported per [PyPA Guidance](https://packaging.python.org/en/latest/guides/writing-pyproject-toml/)
+**NOTE:** Only pyproject.toml is currently inspected. It is assumed that project metadata is specified per [PyPA Guidance](https://packaging.python.org/en/latest/guides/writing-pyproject-toml/)
 
 ### `check-eol`
 Check `requires-python` against the current Python lifecycle & fail if an EOL version is included.

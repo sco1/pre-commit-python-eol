@@ -1,5 +1,6 @@
 [tool.bumper]
-current_version = "0.1.0"
+current_version = "2025.5.0"
+versioning_type = "calver"
 
 [[tool.bumper.files]]
 file = "./pyproject.toml"

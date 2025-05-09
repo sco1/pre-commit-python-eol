@@ -1,6 +1,6 @@
 [project]
 name = "pre-commit-python-eol"
-version = "0.1.0"
+version = "2025.5.0"
 description = "A pre-commit hook for enforcing supported Python EOL"
 license = "MIT"
 license-files = ["LICENSE"]
@@ -22,7 +22,7 @@ classifiers = [
 
 requires-python = ">=3.11"
 dependencies = [
-    "packaging~=24.2",
+    "packaging~=25.0",
 ]
 
 [project.urls]
@@ -47,7 +47,8 @@ dev-dependencies = [
     "pytest-cov~=6.0",
     "pytest-randomly~=3.16",
     "ruff~=0.9",
-    "sco1-bumper~=1.0",
+    "sco1-bumper~=2.0",
+    "time-machine~=2.16",
     "tox~=4.23",
     "tox-uv~=1.17",
 ]
