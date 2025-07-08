@@ -101,6 +101,12 @@ def _get_cached_release_cycle(cache_json: Path) -> list[PythonRelease]:
 
 
 def check_python_support(toml_file: Path, cache_json: Path = CACHED_RELEASE_CYCLE) -> None:
+    """
+    Check the input TOML's `requires-python` for overlap with EOL Python version(s).
+
+    If overlap(s) are present, an exception is raised whose message enumerates all EOL Python
+    versions supported by the TOML file.
+    """
     with toml_file.open("rb") as f:
         contents = tomllib.load(f)
 
