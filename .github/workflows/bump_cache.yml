@@ -1,0 +1,51 @@
+name: Check Cached Release Cycle
+
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: "0 9 1 1,4,7,10 *"
+
+jobs:
+  bump-cache:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      issues: write
+
+    steps:
+    - uses: actions/checkout@v5
+
+    - name: Set up Python
+      uses: actions/setup-python@v6
+      with:
+        python-version-file: "pyproject.toml"
+
+    - name: Install uv
+      uses: astral-sh/setup-uv@v6
+      with:
+        version: "0.8.x"
+        enable-cache: true
+        cache-dependency-glob: "uv.lock"
+
+    - name: Bump Cache
+      id: bump
+      env:
+        PUBLIC_PAT: ${{ secrets.PUBLIC_PAT }}
+      run: |
+        uv sync --no-dev --extra gha
+        uv run ./pre_commit_python_eol/bump_cache.py
+        {
+          echo 'RES<<EOF'
+          git diff ./cached_release_cycle.json
+          echo EOF
+        } >> "$GITHUB_OUTPUT"
+
+    - name: Open Issue If Bumped
+      if: ${{ steps.bump.outputs.RES != ''}}
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      run: |
+        today=$(date +"%Y-%m-%d")
+        gh issue create \
+          --title "($today) Release Cycle Cache Outdated" \
+          --body '\`\`\`diff\n${{ steps.report.outputs.RES }}\n\`\`\`'

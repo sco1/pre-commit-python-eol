@@ -17,6 +17,7 @@ classifiers = [
     "Programming Language :: Python :: 3.11",
     "Programming Language :: Python :: 3.12",
     "Programming Language :: Python :: 3.13",
+    "Programming Language :: Python :: 3.14",
     "Typing :: Typed",
 ]
 
@@ -35,22 +36,28 @@ Changelog = "https://github.com/sco1/pre-commit-python-eol/blob/main/CHANGELOG.m
 [project.scripts]
 checkeol = "pre_commit_python_eol.check_eol:main"
 
-[tool.uv]
-dev-dependencies = [
+[dependency-groups]
+dev = [
     "black~=25.0",
     "flake8~=7.1",
     "flake8-annotations~=3.1",
+    "flake8-define-class-attributes~=0.2",
     "isort~=6.0",
     "mypy~=1.14",
     "pre-commit~=4.0",
     "pytest~=8.3",
-    "pytest-cov~=6.0",
-    "pytest-randomly~=3.16",
+    "pytest-cov~=7.0",
+    "pytest-randomly~=4.0",
     "ruff~=0.9",
     "sco1-bumper~=2.0",
     "time-machine~=2.16",
     "tox~=4.23",
     "tox-uv~=1.17",
+]
+
+[project.optional-dependencies]
+gha = [
+    "httpx~=0.28",
 ]
 
 [tool.black]
@@ -69,6 +76,7 @@ disallow_incomplete_defs = true
 disallow_untyped_calls = true
 disallow_untyped_decorators = true
 disallow_untyped_defs = true
+enable_error_code = "exhaustive-match"
 ignore_missing_imports = true
 no_implicit_optional = true
 show_error_codes = true
@@ -77,6 +85,10 @@ warn_return_any = true
 warn_unused_configs = true
 warn_unused_ignores = true
 
+[tool.uv.build-backend]
+module-name = "pre_commit_python_eol"
+module-root = ""
+
 [build-system]
-requires = ["hatchling"]
-build-backend = "hatchling.build"
+requires = ["uv_build"]
+build-backend = "uv_build"
