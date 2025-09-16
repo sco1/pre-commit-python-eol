@@ -9,3 +9,7 @@ search = 'version = "{current_version}"'
 [[tool.bumper.files]]
 file = "./README.md"
 search = "rev: v{current_version}"
+
+[[tool.bumper.files]]
+file = "./pre_commit_python_eol/__init__.py"
+search = '__version__ = "{current_version}"'
