@@ -3,7 +3,7 @@ name: Check Cached Release Cycle
 on:
   workflow_dispatch:
   schedule:
-    - cron: "0 9 1 1,4,7,10 *"
+    - cron: "0 9 14 1,4,7,10 *"
 
 jobs:
   bump-cache:
@@ -21,9 +21,9 @@ jobs:
         python-version-file: "pyproject.toml"
 
     - name: Install uv
-      uses: astral-sh/setup-uv@v6
+      uses: astral-sh/setup-uv@v7
       with:
-        version: "0.8.x"
+        version: "0.9.x"
         enable-cache: true
         cache-dependency-glob: "uv.lock"
 
