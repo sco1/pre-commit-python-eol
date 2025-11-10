@@ -17,9 +17,7 @@ USER_AGENT = (
     f"{platform.python_implementation()}/{platform.python_version()}"
 )
 
-CACHE_SOURCE = (
-    "https://raw.githubusercontent.com/python/devguide/refs/heads/main/include/release-cycle.json"
-)
+CACHE_SOURCE = "https://peps.python.org/api/release-cycle.json"
 LOCAL_CACHE = Path("./cached_release_cycle.json")
 
 

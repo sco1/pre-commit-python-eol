@@ -72,8 +72,8 @@ class PythonRelease:  # noqa: D101
         """
         Create a `PythonRelease` instance from the provided JSON components.
 
-        JSON components are assumed to be of the format provided by the Python Devguide:
-        https://github.com/python/devguide/blob/main/include/release-cycle.json
+        JSON components are assumed to be of the format provided by the Python PEPs API:
+        https://peps.python.org/api/release-cycle.json
         """
         return cls(
             python_ver=version.Version(ver),
