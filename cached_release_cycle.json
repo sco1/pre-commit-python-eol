@@ -50,9 +50,9 @@
   "3.9": {
     "branch": "3.9",
     "pep": 596,
-    "status": "security",
+    "status": "end-of-life",
     "first_release": "2020-10-05",
-    "end_of_life": "2025-10",
+    "end_of_life": "2025-10-31",
     "release_manager": "Łukasz Langa"
   },
   "3.8": {
@@ -101,7 +101,7 @@
     "status": "end-of-life",
     "first_release": "2012-09-29",
     "end_of_life": "2017-09-29",
-    "release_manager": "Georg Brandl, Ned Deily (3.3.7+)"
+    "release_manager": "Georg Brandl & Ned Deily (3.3.7)"
   },
   "3.2": {
     "branch": "3.2",

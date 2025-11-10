@@ -1,6 +1,6 @@
 [project]
 name = "pre-commit-python-eol"
-version = "2025.10.0"
+version = "2025.11.0"
 description = "A pre-commit hook for enforcing supported Python EOL"
 license = "MIT"
 license-files = ["LICENSE"]
@@ -42,10 +42,10 @@ dev = [
     "flake8~=7.1",
     "flake8-annotations~=3.1",
     "flake8-define-class-attributes~=0.2",
-    "isort~=6.0",
+    "isort~=7.0",
     "mypy~=1.14",
     "pre-commit~=4.0",
-    "pytest~=8.3",
+    "pytest~=9.0",
     "pytest-cov~=7.0",
     "pytest-randomly~=4.0",
     "ruff~=0.9",
