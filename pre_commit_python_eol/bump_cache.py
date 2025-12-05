@@ -18,7 +18,7 @@ USER_AGENT = (
 )
 
 CACHE_SOURCE = "https://peps.python.org/api/release-cycle.json"
-LOCAL_CACHE = Path("./cached_release_cycle.json")
+LOCAL_CACHE = Path("./pre_commit_python_eol/cached_release_cycle.json")
 
 
 def bump_cache() -> None:
