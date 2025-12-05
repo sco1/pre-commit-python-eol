@@ -3,7 +3,7 @@ name: Check Cached Release Cycle
 on:
   workflow_dispatch:
   schedule:
-    - cron: "0 9 14 1,4,7,10 *"
+    - cron: "0 14 14 1,4,7,10 *"
 
 jobs:
   bump-cache:
@@ -13,7 +13,7 @@ jobs:
       issues: write
 
     steps:
-    - uses: actions/checkout@v5
+    - uses: actions/checkout@v6
 
     - name: Set up Python
       uses: actions/setup-python@v6
@@ -36,7 +36,7 @@ jobs:
         uv run ./pre_commit_python_eol/bump_cache.py
         {
           echo 'RES<<EOF'
-          git diff ./cached_release_cycle.json
+          git diff ./pre_commit_python_eol/cached_release_cycle.json
           echo EOF
         } >> "$GITHUB_OUTPUT"
 
