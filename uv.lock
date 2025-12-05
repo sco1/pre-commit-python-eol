@@ -446,7 +446,7 @@ wheels = [
 
 [[package]]
 name = "pre-commit-python-eol"
-version = "2025.10.0"
+version = "2025.11.0"
 source = { editable = "." }
 dependencies = [
     { name = "packaging" },

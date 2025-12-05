@@ -14,7 +14,7 @@ from pathlib import Path
 
 from packaging import specifiers, version
 
-CACHED_RELEASE_CYCLE = Path("./cached_release_cycle.json")
+CACHED_RELEASE_CYCLE = Path(__file__).parent / "cached_release_cycle.json"
 
 
 class EOLPythonError(Exception): ...  # noqa: D101
