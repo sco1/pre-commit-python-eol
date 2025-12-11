@@ -4,3 +4,10 @@
   language: python
   files: '^pyproject.toml$'
   types: [toml]
+
+- id: check-eol-cached
+  name: Check supported Python EOL (cached)
+  entry: checkeol --cached
+  language: python
+  files: '^pyproject.toml$'
+  types: [toml]

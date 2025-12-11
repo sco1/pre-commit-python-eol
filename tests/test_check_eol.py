@@ -213,3 +213,45 @@ def test_check_python_support_multi_eol_raises(path_with_cache: tuple[Path, Path
             check_python_support(pyproject, cache_json=cache_path)
 
     assert str(e.value).endswith("3.7, 3.8")
+
+
+def test_check_cached_python_support_no_eol(path_with_cache: tuple[Path, Path]) -> None:
+    base_path, cache_path = path_with_cache
+    pyproject = base_path / "pyproject.toml"
+    pyproject.write_text(SAMPLE_PYPROJECT_NO_EOL)
+
+    check_python_support(
+        pyproject,
+        cache_json=cache_path,
+        cached=True,
+    )
+
+
+def test_check_cached_python_support_single_eol_raises(path_with_cache: tuple[Path, Path]) -> None:
+    base_path, cache_path = path_with_cache
+    pyproject = base_path / "pyproject.toml"
+    pyproject.write_text(SAMPLE_PYPROJECT_SINGLE_EOL)
+
+    with pytest.raises(EOLPythonError) as e:
+        check_python_support(
+            pyproject,
+            cache_json=cache_path,
+            cached=True,
+        )
+
+    assert str(e.value).endswith("3.8")
+
+
+def test_check_cached_python_support_single_eol_no_raises_by_date(
+    path_with_cache: tuple[Path, Path],
+) -> None:
+    base_path, cache_path = path_with_cache
+    pyproject = base_path / "pyproject.toml"
+    pyproject.write_text(SAMPLE_PYPROJECT_SINGLE_EOL_BY_DATE)
+
+    with time_machine.travel(dt.date(year=2031, month=11, day=1)):
+        check_python_support(
+            pyproject,
+            cache_json=cache_path,
+            cached=True,
+        )

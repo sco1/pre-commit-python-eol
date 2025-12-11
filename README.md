@@ -22,5 +22,9 @@ Add this to your `.pre-commit-config.yaml`
 ### `check-eol`
 Check `requires-python` against the current Python lifecycle & fail if an EOL version is included.
 
+### `check-eol-cached`
+The same as `check-eol`, but deterministic. Caches EOL Python versions, which get updated when
+you update the hook.
+
 ## Python Version Support
 Starting with Python 3.11, a best attempt is made to support Python versions until they reach EOL, after which support will be formally dropped by the next minor or major release of this package, whichever arrives first. The status of Python versions can be found [here](https://devguide.python.org/versions/).
