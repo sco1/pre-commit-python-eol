@@ -81,6 +81,23 @@ class PythonRelease:  # noqa: D101
             end_of_life=_parse_eol_date(metadata["end_of_life"]),
         )
 
+    def is_eol(self, use_system_date: bool) -> bool:
+        """
+        Check if this version is end-of-life.
+
+        If `use_system_date` is `True`, an additional date-based check is performed for versions
+        that are not explicitly EOL.
+        """
+        if self.status == ReleasePhase.EOL:
+            return True
+
+        if use_system_date:
+            utc_today = dt.datetime.now(dt.timezone.utc).date()
+            if self.end_of_life <= utc_today:
+                return True
+
+        return False
+
 
 def _get_cached_release_cycle(cache_json: Path) -> list[PythonRelease]:
     """
@@ -100,12 +117,17 @@ def _get_cached_release_cycle(cache_json: Path) -> list[PythonRelease]:
     )
 
 
-def check_python_support(toml_file: Path, cache_json: Path = CACHED_RELEASE_CYCLE) -> None:
+def check_python_support(
+    toml_file: Path, cache_json: Path = CACHED_RELEASE_CYCLE, use_system_date: bool = True
+) -> None:
     """
     Check the input TOML's `requires-python` for overlap with EOL Python version(s).
 
     If overlap(s) are present, an exception is raised whose message enumerates all EOL Python
     versions supported by the TOML file.
+
+    If `use_system_date` is `True`, an additional date-based check is performed for versions that
+    are not explicitly EOL.
     """
     with toml_file.open("rb") as f:
         contents = tomllib.load(f)
@@ -116,18 +138,10 @@ def check_python_support(toml_file: Path, cache_json: Path = CACHED_RELEASE_CYCL
 
     package_spec = specifiers.SpecifierSet(requires_python)
     release_cycle = _get_cached_release_cycle(cache_json)
-    utc_today = dt.datetime.now(dt.timezone.utc).date()
 
-    eol_supported = []
-    for r in release_cycle:
-        if r.python_ver in package_spec:
-            if r.status == ReleasePhase.EOL:
-                eol_supported.append(r)
-                continue
-
-            if r.end_of_life <= utc_today:
-                eol_supported.append(r)
-                continue
+    eol_supported = [
+        r for r in release_cycle if ((r.python_ver in package_spec) and r.is_eol(use_system_date))
+    ]
 
     if eol_supported:
         eol_supported.sort(key=attrgetter("python_ver"))  # Sort ascending for error msg generation
@@ -138,12 +152,13 @@ def check_python_support(toml_file: Path, cache_json: Path = CACHED_RELEASE_CYCL
 def main(argv: abc.Sequence[str] | None = None) -> int:  # noqa: D103
     parser = argparse.ArgumentParser()
     parser.add_argument("filenames", nargs="*", type=Path)
+    parser.add_argument("--cache_only", action="store_true")
     args = parser.parse_args(argv)
 
     ec = 0
     for file in args.filenames:
         try:
-            check_python_support(file)
+            check_python_support(file, use_system_date=(not args.cache_only))
         except EOLPythonError as e:
             print(f"{file}: {e}")
             ec = 1
