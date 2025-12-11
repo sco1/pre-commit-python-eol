@@ -11,20 +11,25 @@ Add this to your `.pre-commit-config.yaml`
 
 ```yaml
 -   repo: https://github.com/sco1/pre-commit-python-eol
-    rev: v2025.12.0
+    rev: v2025.12.1
     hooks:
     - id: check-eol
+    - id: check-eol-cached
 ```
 
+While both hooks are technically compatible with each other, it's advised to choose a single hook behavior that best fits your needs.
+
+### EOL Status Cache
+To avoid requiring network connectivity at runtime, EOL status is cached to [a local JSON file](./pre_commit_python_eol/cached_release_cycle.json) distributed alongside this hook. The cache is updated quarterly & a changed cache will result in a version bump for this hook.
+
 ## Hooks
-**NOTE:** Only pyproject.toml is currently inspected. It is assumed that project metadata is specified per [PyPA Guidance](https://packaging.python.org/en/latest/guides/writing-pyproject-toml/)
+Only `pyproject.toml` is currently inspected. It is assumed that project metadata is specified per [PyPA Guidance](https://packaging.python.org/en/latest/guides/writing-pyproject-toml/)
 
 ### `check-eol`
-Check `requires-python` against the current Python lifecycle & fail if an EOL version is included.
+Check `requires-python` against the current Python lifecycle & fail if an EOL version is included; this includes a date-based check using the system's time for versions that have not yet explicitly been declared EOL.
 
 ### `check-eol-cached`
-The same as `check-eol`, but deterministic. Caches EOL Python versions, which get updated when
-you update the hook.
+Check `requires-python` against the current Python lifecycle & fail if an EOL version is included; this hook utilizes only the cached release cycle information.
 
 ## Python Version Support
 Starting with Python 3.11, a best attempt is made to support Python versions until they reach EOL, after which support will be formally dropped by the next minor or major release of this package, whichever arrives first. The status of Python versions can be found [here](https://devguide.python.org/versions/).

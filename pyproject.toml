@@ -1,6 +1,6 @@
 [project]
 name = "pre-commit-python-eol"
-version = "2025.12.0"
+version = "2025.12.1"
 description = "A pre-commit hook for enforcing supported Python EOL"
 license = "MIT"
 license-files = ["LICENSE"]
