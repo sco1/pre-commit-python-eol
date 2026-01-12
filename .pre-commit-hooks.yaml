@@ -2,12 +2,12 @@
   name: Check supported Python EOL
   entry: checkeol
   language: python
-  files: '^pyproject.toml$'
+  files: '^pyproject\.toml$'
   types: [toml]
 
 - id: check-eol-cached
   name: Check supported Python EOL (cache only)
   entry: checkeol --cache_only
   language: python
-  files: '^pyproject.toml$'
+  files: '^pyproject\.toml$'
   types: [toml]
