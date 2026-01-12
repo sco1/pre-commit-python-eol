@@ -1,6 +1,10 @@
 # Changelog
 Versions follow [Calendar Versioning](https://calver.org/) (`<YYYY>`.`<MM>`.`<MICRO>`)
 
+## [v2026.1.0]
+### Fixed
+* #12 Fix incorrect filepath specification regex in hook definition
+
 ## [v2025.12.1]
 ### Added
 * #8 Add the `check-eol-cached` hook, which utilizies only the cached EOL information and does not incorporate a date-based check

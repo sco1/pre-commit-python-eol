@@ -11,7 +11,7 @@ Add this to your `.pre-commit-config.yaml`
 
 ```yaml
 -   repo: https://github.com/sco1/pre-commit-python-eol
-    rev: v2025.12.1
+    rev: v2026.1.0
     hooks:
     - id: check-eol
     - id: check-eol-cached

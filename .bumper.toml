@@ -1,5 +1,5 @@
 [tool.bumper]
-current_version = "2025.12.1"
+current_version = "2026.1.0"
 versioning_type = "calver"
 
 [[tool.bumper.files]]
