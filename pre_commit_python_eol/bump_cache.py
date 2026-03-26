@@ -5,15 +5,15 @@ from pathlib import Path
 from pre_commit_python_eol import __url__, __version__
 
 try:
-    import httpx
+    import niquests
 except ImportError:
     raise RuntimeError(
-        "httpx was not installed, please install the 'gha' dependency group"
+        "niquests was not installed, please install the 'gha' dependency group"
     ) from None
 
 USER_AGENT = (
     f"pre-commit-check-eol/{__version__} ({__url__}) "
-    f"httpx/{httpx.__version__} "
+    f"niquests/{niquests.__version__} "
     f"{platform.python_implementation()}/{platform.python_version()}"
 )
 
@@ -23,7 +23,7 @@ LOCAL_CACHE = Path("./pre_commit_python_eol/cached_release_cycle.json")
 
 def bump_cache() -> None:
     """Update the cached release cycle JSON from the source repository."""
-    with httpx.Client(headers={"User-Agent": USER_AGENT}) as client:
+    with niquests.Session(headers={"User-Agent": USER_AGENT}) as client:
         r = client.get(CACHE_SOURCE)
         r.raise_for_status()
 
