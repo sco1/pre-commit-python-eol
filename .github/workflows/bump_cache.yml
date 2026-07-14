@@ -41,11 +41,13 @@ jobs:
         } >> "$GITHUB_OUTPUT"
 
     - name: Open Issue If Bumped
-      if: ${{ steps.bump.outputs.RES != ''}}
+      if: ${{ steps.bump.outputs.RES != '' }}
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        DIFF: ${{ steps.bump.outputs.RES }}
       run: |
         today=$(date +"%Y-%m-%d")
+        body=$(printf '```diff\n%s\n```\n' "$DIFF")
         gh issue create \
           --title "($today) Release Cycle Cache Outdated" \
-          --body '\`\`\`diff\n${{ steps.report.outputs.RES }}\n\`\`\`'
+          --body "$body"
