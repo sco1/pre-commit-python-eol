@@ -1,6 +1,10 @@
 # Changelog
 Versions follow [Calendar Versioning](https://calver.org/) (`<YYYY>`.`<MM>`.`<MICRO>`)
 
+## [v2026.7.0]
+### Changed
+* Update cached releases
+
 ## [v2026.1.0]
 ### Fixed
 * #12 Fix incorrect filepath specification regex in hook definition

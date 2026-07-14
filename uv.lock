@@ -696,7 +696,7 @@ wheels = [
 
 [[package]]
 name = "pre-commit-python-eol"
-version = "2026.1.0"
+version = "2026.7.0"
 source = { editable = "." }
 dependencies = [
     { name = "packaging" },
